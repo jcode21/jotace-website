@@ -1,0 +1,12 @@
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.detail-row td a {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.detail-row td a:nth-last-child(1) {
+    border-bottom: none !important;
+}
+
