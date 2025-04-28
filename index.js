@@ -192,8 +192,6 @@ function searchEvents() {
 }
 
 function renderChannels(data) {
-    const containerNavBar = document.getElementById('containerNavBar');
-    containerNavBar.innerHTML = '';
 
     const sortedData = [...data].sort((a, b) => Number(a.order) - Number(b.order));
 
@@ -205,13 +203,13 @@ function renderChannels(data) {
             if (channel.links[0].url.includes(".m3u8")) {
                 li.innerHTML = `
                     <a href="play/play.html?channelId=${channel.id}&linkId=${channel.links[0].id}"
-                       target="_blank" class="nav-link">
+                       target="_blank" class="dropdown-item">
                         ${channel.name}
                     </a>`;
             } else {
                 li.innerHTML = `
                     <a href="channel/channel.html?channelId=${channel.id}&linkId=${channel.links[0].id}"
-                       target="_blank" class="nav-link">
+                       target="_blank" class="dropdown-item">
                         ${channel.name}
                     </a>`;
             }
