@@ -126,7 +126,7 @@ function renderTable(data, tableId, showDate = false) {
     tableBody.innerHTML = "";
 
     if (!data.length) {
-        tableBody.innerHTML = `<tr><td colspan="2" class="text-center">No hay eventos disponibles</td></tr>`;
+        //tableBody.innerHTML = `<tr><td colspan="2" class="text-center">No hay eventos disponibles</td></tr>`;
         return;
     }
 
@@ -215,9 +215,11 @@ function renderChannels(data) {
                             <div class="card text-center card-border-green shadow-sm">
                                 <div class="card-body">
                                     <img src="/img/channels/espn.png" alt="${channel.name} Logo" class="mb-1" style="width: 100px; height: auto;">
-                                    <h5 class="card-title fw-bold">${channel.name}</h5>
-                                    <a href="play/play.html?channelId=${channel.id}&linkId=${channel.links[0].id}" target="_blank" class="btn btn-danger btn-sm">
-                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    <h6 class="card-title fw-bold">${channel.name}</h6>
+                                    <a href="play/play.html?channelId=${channel.id}&linkId=${channel.links[0].id}" target="_blank"
+                                                class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill"
+                                                style="font-size: 0.75rem;">
+                                        <i class="bi bi-play-fill me-1"></i>Ver canal
                                     </a>
                                 </div>
                             </div>
@@ -230,7 +232,7 @@ function renderChannels(data) {
                        target="_blank" class="dropdown-item">
                         ${channel.name}
                     </a>`;
-                
+
             } else {
 
                 cards += `
@@ -238,9 +240,11 @@ function renderChannels(data) {
                             <div class="card text-center card-border-green shadow-sm">
                                 <div class="card-body">
                                     <img src="/img/channels/espn.png" alt="${channel.name} Logo" class="mb-1" style="width: 100px; height: auto;">
-                                    <h5 class="card-title fw-bold">${channel.name}</h5>
-                                    <a href="channel/channel.html?channelId=${channel.id}&linkId=${channel.links[0].id}" target="_blank" class="btn btn-danger btn-sm">
-                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    <h6 class="card-title fw-bold">${channel.name}</h6>
+                                    <a href="channel/channel.html?channelId=${channel.id}&linkId=${channel.links[0].id}" target="_blank"
+                                                class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill"
+                                                style="font-size: 0.75rem;">
+                                        <i class="bi bi-play-fill me-1"></i>Ver canal
                                     </a>
                                 </div>
                             </div>
