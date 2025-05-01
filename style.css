@@ -10,3 +10,129 @@
     border-bottom: none !important;
 }
 
+
+
+/* Añadir una línea en la parte inferior del navbar */
+.navbar {
+    background-color: rgb(0, 21, 28) !important;
+    /* Fondo igual al de la card */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Sombra suave */
+    transition: background-color 0.3s ease;
+    /* Transición suave para el cambio de color */
+    border-bottom: 1px solid rgb(255, 153, 51) !important;
+    /* Línea en la parte inferior del navbar */
+}
+
+/* Cambiar el color de los enlaces del navbar cuando se pasa el mouse */
+.navbar .navbar-nav .nav-link:hover {
+    color: rgb(255, 153, 51) !important;
+    /* Cambia a anaranjado */
+    transform: scale(1.1);
+    /* Efecto de zoom al pasar por encima */
+}
+
+/* Cambiar el color del menú desplegable cuando se pasa el mouse */
+.navbar .nav-item.dropdown .dropdown-item:hover {
+    background-color: rgb(255, 153, 51);
+    /* Cambia a anaranjado */
+    color: #ffffff !important;
+}
+
+/* Cambiar el color del icono del navbar-toggler al pasar el mouse */
+.navbar-toggler-icon:hover {
+    transform: scale(1.1);
+    background-image: url('data:image/svg+xml,%3csvg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="rgb(255, 153, 51)"%3e%3cpath stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"%3e%3c/path%3e%3c/svg%3e');
+}
+
+body {
+    background-color: rgb(0, 30, 40) !important;
+    color: #ffffff !important;
+}
+
+.card {
+    background-color: rgb(0, 21, 28) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.4) !important;
+}
+
+.card-border-green {
+    border: 1px solid rgb(0, 204, 102) !important;
+}
+
+.card-border-red {
+    border: 1px solid rgb(255, 51, 51) !important;
+}
+
+.card-border-orange {
+    border: 1px solid rgb(255, 153, 51) !important;
+}
+
+.card-border-pending {
+    border: 1px solid rgb(84, 84, 84) !important;
+}
+
+.card {
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+
+.card .btn-danger {
+    background-color: rgb(0, 102, 204) !important;
+    border-color: rgb(0, 102, 204) !important;
+}
+
+.card .btn-danger:hover {
+    background-color: rgb(0, 82, 164) !important;
+}
+
+.form-control {
+    background-color: rgb(10, 30, 40) !important;
+    color: #ffffff !important;
+    border: 1px solid rgb(0, 102, 204) !important;
+}
+
+.btn {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+::placeholder {
+    color: #ffffff !important;
+    opacity: 0.7;
+    /* opcional: para que no sea demasiado fuerte */
+}
+
+.vs-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: transparent;
+    font-size: 12px !important;
+    line-height: 1;
+}
+
+.vs-circle-green {
+    border: 2px solid #00CC66;
+}
+
+.vs-circle-pending {
+    border: 2px solid rgb(84, 84, 84);
+}
+
+.vs-circle-red {
+    border: 2px solid rgb(255, 51, 51);
+}
+
+.vs-circle-orange {
+    border: 1px solid rgb(255, 153, 51);
+}

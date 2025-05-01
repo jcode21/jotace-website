@@ -18,8 +18,8 @@ async function fetchData() {
             eventsDataToday = eventsToday;
             eventsDataNext = eventsNext;
             channelsData = data.channels
-            renderTable(eventsDataToday, 'tBodyToday');
-            renderTable(eventsDataNext, 'tBodyNext', true);
+            //renderTable(eventsDataToday, 'tBodyToday');
+            //renderTable(eventsDataNext, 'tBodyNext', true);
             renderChannels(channelsData);
         }
 
@@ -193,30 +193,74 @@ function searchEvents() {
 
 function renderChannels(data) {
 
+    const divRowsChannels = document.getElementById("divRowsChannels");
+    divRowsChannels.innerHTML = "";
+
+    const containerNavBar = document.getElementById("containerNavBar");
+    containerNavBar.innerHTML = "";
+
     const sortedData = [...data].sort((a, b) => Number(a.order) - Number(b.order));
 
+    let cards = ''
     sortedData.forEach(channel => {
         if (channel.show === 'Y' && channel.links.length > 0) {
+
             const li = document.createElement("li");
             li.classList.add("cursor-pointer");
 
             if (channel.links[0].url.includes(".m3u8")) {
+
+                cards += `
+                        <div class="col-12 col-md-3 col-sm-4 mb-4">
+                            <div class="card text-center card-border-green shadow-sm">
+                                <div class="card-body">
+                                    <img src="/img/channels/espn.png" alt="${channel.name} Logo" class="mb-1" style="width: 100px; height: auto;">
+                                    <h5 class="card-title fw-bold">${channel.name}</h5>
+                                    <a href="play/play.html?channelId=${channel.id}&linkId=${channel.links[0].id}" target="_blank" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                
+                `;
+
                 li.innerHTML = `
                     <a href="play/play.html?channelId=${channel.id}&linkId=${channel.links[0].id}"
                        target="_blank" class="dropdown-item">
                         ${channel.name}
                     </a>`;
+                
             } else {
+
+                cards += `
+                        <div class="col-12 col-md-3 col-sm-4 mb-4">
+                            <div class="card text-center card-border-green shadow-sm">
+                                <div class="card-body">
+                                    <img src="/img/channels/espn.png" alt="${channel.name} Logo" class="mb-1" style="width: 100px; height: auto;">
+                                    <h5 class="card-title fw-bold">${channel.name}</h5>
+                                    <a href="channel/channel.html?channelId=${channel.id}&linkId=${channel.links[0].id}" target="_blank" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                
+                `;
+
                 li.innerHTML = `
                     <a href="channel/channel.html?channelId=${channel.id}&linkId=${channel.links[0].id}"
                        target="_blank" class="dropdown-item">
                         ${channel.name}
                     </a>`;
+
             }
 
             containerNavBar.append(li);
         }
     });
+
+    divRowsChannels.innerHTML = cards;
 }
 
 document.getElementById("searchEvent").addEventListener("input", searchEvents);

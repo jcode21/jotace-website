@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Jotace Futbol TV</title>
+
+    <meta name="description" content="Ofrecemos canales gratuitos para ver partidos
+        de fútbol de todas las ligas del mundo.">
+    <meta name="keywords" content="futbol en vivo, la liga, Champions League, f1, NBA">
+    <meta name="author" content="Jotace Futbol TV">
+
+    <!-- Metadatos para dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Meta Open Graph para compartir en redes sociales -->
+    <meta property="og:title" content="Jotace Futbol TV - Futbol en vivo gratis">
+    <meta property="og:description" content="Ofrecemos canales gratuitos para ver partidos
+        de fútbol de todas las ligas del mundo.">
+    <meta property="og:image" content="https://jotacefutbol.com/img/icon.png">
+    <meta property="og:url" content="https://jotacefutbol.com">
+
+    <!-- Meta Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jotace Futbol TV - Futbol en vivo gratis">
+    <meta name="twitter:description" content="Ofrecemos canales gratuitos para ver partidos
+        de fútbol de todas las ligas del mundo.">
+    <meta name="twitter:image" content="https://jotacefutbol.com/img/icon.png">
+
+    <link rel="icon" type="image/png" href="/img/icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1.29">
+    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css?v=1.29">
+
+</head>
+
+<body class="dark-mode">
+
+    <div id="loadingScreen" style="
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+">
+        <div>
+            <span>Cargando Eventos. . .</span>
+            <div class="spinner-border text-primary ms-2" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark p-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Jotace Futbol TV</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto" id="containerNavBarTmp">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Champions League</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">La Liga</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Premier League</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Copa Libertadores</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkCanalesTV"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Canales de TV
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCanalesTV"
+                                id="containerNavBar">
+                                <!-- Aquí irían los elementos del menú desplegable -->
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container mt-3">
+            <!--ROW TITLE PRINCIPAL-->
+            <div class="row">
+                <div class="col-12 col-md-3 mt-4 d-none d-md-block">
+                    <p class="text-center">
+                        <a href="https://play.google.com/store/apps/details?id=com.jcc.gota"><img
+                                src="/img/qr_blue_web.svg" alt="img-app" style="width: 130px; height: 130px;"></a>
+                    </p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h3 class="text-center fw-bold">Jotace Futbol TV</h3>
+                    <p class="description">
+                        <strong>Jotace Futbol TV</strong> ofrece canales gratuitos para ver partidos
+                        del fútbol de Perú, Argentina, Chile, Colombia, Uruguay, Ecuador, Copa Libertadores, Copa
+                        Sudamericana, Champions League, LaLiga Española, y muchos más. También puedes descargar nuestra
+                        app en el siguiente enlace:
+                    </p>
+                    <p class="text-center">
+                        <strong><a href="https://play.google.com/store/apps/details?id=com.jcc.gota"><img
+                                    src="/img/playstore.png" alt="Icono" style="width:24px; height:24px;"> Click para
+                                descargar la App desde
+                                Play Store</a></strong>
+                    </p>
+                    <p class="text-center d-block d-sm-none">
+                        <a href="https://play.google.com/store/apps/details?id=com.jcc.gota"><img
+                                src="/img/qr_blue_web.svg" alt="img-app" style="width: 120px; height: 120px;"></a>
+                    </p>
+                </div>
+                <div class="col-12 col-md-3 mt-4 d-none d-md-block">
+                    <p class="text-center">
+                        <a href="https://play.google.com/store/apps/details?id=com.jcc.gota"><img
+                                src="/img/qr_blue_web.svg" alt="img-app" style="width: 130px; height: 130px;"></a>
+                    </p>
+                </div>
+            </div>
+
+            <!--ROW AGENDA-->
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6">
+                    <h4 class="text-center fw-bold" id="title-agenda">Agenda</h4>
+                </div>
+            </div>
+            <!--ROW SEARCH EVENTS-->
+            <div class="row">
+                <div class="col-md-3 d-none d-md-block"></div>
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="Buscar evento" id="searchEvent">
+                </div>
+            </div>
+            <!--ROW CONTENT CARDS CURRENT EVENT-->
+            <div class="row mt-3">
+                <!-- Espacio para banner largo en el lado izquierdo -->
+                <div class="col-md-3 d-none d-md-block">
+                    <!-- Banner izquierdo largo -->
+                </div>
+                <!-- Espacio para las cards -->
+                <div class="col-md-6" id="divRowsCurrentEvents">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="card shadow-sm border-start border-1 card-border-green">
+                                <div class="card-body py-2 px-3 dark-mode rounded">
+                                    <h6 class="card-title text-center mb-2 fw-bold">
+                                        🕒 20:00
+                                    </h6>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="text-center small">
+                                            <strong>🏠 Equipo Local</strong>
+                                        </div>
+                                        <span class="vs-circle vs-circle-green">vs</span>
+                                        <div class="text-center small">
+                                            <strong>✈️ Equipo Visitante</strong>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between small mb-2 px-1">
+                                        <div>👨‍🦰 Juan Pérez</div>
+                                        <div>🏟️ Monumental</div>
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                                            <a href="https://enlace1.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 1
+                                            </a>
+                                            <a href="https://enlace2.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 2
+                                            </a>
+                                            <a href="https://enlace3.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 3
+                                            </a>
+                                            <a href="https://enlace4.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 4
+                                            </a>
+                                            <a href="https://enlace5.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 5
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="card shadow-sm border-start border-1 card-border-orange">
+                                <div class="card-body py-2 px-3 dark-mode rounded">
+                                    <h6 class="card-title text-center mb-2 fw-bold">
+                                        🕒 20:00
+                                    </h6>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="text-center small">
+                                            <strong>🏠 Equipo Local</strong>
+                                        </div>
+                                        <span class="vs-circle vs-circle-orange">vs</span>
+                                        <div class="text-center small">
+                                            <strong>✈️ Equipo Visitante</strong>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between small mb-2 px-1">
+                                        <div>👨‍🦰 Juan Pérez</div>
+                                        <div>🏟️ Monumental</div>
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                                            <a href="https://enlace1.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 1
+                                            </a>
+                                            <a href="https://enlace2.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 2
+                                            </a>
+                                            <a href="https://enlace3.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 3
+                                            </a>
+                                            <a href="https://enlace4.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 4
+                                            </a>
+                                            <a href="https://enlace5.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 5
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="card shadow-sm border-start border-1 card-border-pending">
+                                <div class="card-body py-2 px-3 dark-mode rounded">
+                                    <h6 class="card-title text-center mb-2 fw-bold">
+                                        🕒 20:00
+                                    </h6>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="text-center small">
+                                            <strong>🏠 Equipo Local</strong>
+                                        </div>
+                                        <span class="vs-circle vs-circle-pending">vs</span>
+                                        <div class="text-center small">
+                                            <strong>✈️ Equipo Visitante</strong>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between small mb-2 px-1">
+                                        <div>👨‍🦰 Juan Pérez</div>
+                                        <div>🏟️ Monumental</div>
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                                            <a href="https://enlace1.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 1
+                                            </a>
+                                            <a href="https://enlace2.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 2
+                                            </a>
+                                            <a href="https://enlace3.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 3
+                                            </a>
+                                            <a href="https://enlace4.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 4
+                                            </a>
+                                            <a href="https://enlace5.com" target="_blank"
+                                                class="btn btn-danger btn-sm px-2 py-1">
+                                                <i class="bi bi-play-fill"></i>PLAY 5
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Espacio para banner largo en el lado derecho -->
+                <div class="col-md-3 d-none d-md-block">
+                    <!-- Banner derecho largo -->
+                </div>
+            </div>
+
+
+            <!--ROW PROXIMOS EVENTOS-->
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6">
+                    <h4 class="text-center fw-bold" id="title-agenda-next">Proximos Eventos</h4>
+                </div>
+            </div>
+            <!--ROW CONTENT CARD NEXT EVENTS-->
+            <div class="row mt-2">
+                <!-- Espacio para banner largo en el lado izquierdo -->
+                <div class="col-md-3 d-none d-md-block">
+                    <!-- Banner izquierdo largo -->
+                </div>
+
+                <!-- Espacio para las cards -->
+                <div class="col-md-6" id="divRowsNextEvents">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="card shadow-sm border-start border-1 card-border-pending">
+                                <div class="card-body py-2 px-3 dark-mode rounded">
+                                    <h6 class="card-title text-center mb-2 fw-bold">
+                                        🗓️ 02/05/2025 20:00
+                                    </h6>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="text-center small">
+                                            <strong>🏠 Equipo Local</strong>
+                                        </div>
+                                        <span class="vs-circle vs-circle-pending">vs</span>
+                                        <div class="text-center small">
+                                            <strong>✈️ Equipo Visitante</strong>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between small mb-2 px-1">
+                                        <div>👨‍🦰 Juan Pérez</div>
+                                        <div>🏟️ Monumental</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="card shadow-sm border-start border-1 card-border-pending">
+                                <div class="card-body py-2 px-3 dark-mode rounded">
+                                    <h6 class="card-title text-center mb-2 fw-bold">
+                                        🗓️ 02/05/2025 20:00
+                                    </h6>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="text-center small">
+                                            <strong>🏠 Equipo Local</strong>
+                                        </div>
+                                        <span class="vs-circle vs-circle-pending">vs</span>
+                                        <div class="text-center small">
+                                            <strong>✈️ Equipo Visitante</strong>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between small mb-2 px-1">
+                                        <div>👨‍🦰 Juan Pérez</div>
+                                        <div>🏟️ Monumental</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Espacio para banner largo en el lado derecho -->
+                <div class="col-md-3 d-none d-md-block">
+                    <!-- Banner derecho largo -->
+                </div>
+            </div>
+
+            <!--ROW CHANNELS-->
+            <div class="row mt-3 justify-content-center">
+                <div class="col-12 col-md-6">
+                    <h4 class="text-center fw-bold" id="title-channels">Canales de TV</h4>
+                </div>
+            </div>
+            <!--ROW CONTENT CARD CHANNELS-->
+            <div class="row mt-2">
+                <!-- Espacio para banner largo en el lado izquierdo -->
+                <div class="col-md-1 d-none d-md-block">
+                    <!-- Banner izquierdo largo -->
+                </div>
+
+                <!-- Espacio para las cards -->
+                <div class="col-md-10">
+                    <div class="row justify-content-center" id="divRowsChannels">
+                        <div class="col-12 col-md-3 col-sm-4 mb-4">
+                            <div class="card text-center card-border-green shadow-sm">
+                                <div class="card-body">
+                                    <img src="/img/channels/espn.png" alt="América TV Logo" class="mb-3"
+                                        style="width: 100px; height: auto;">
+                                    <br>
+                                    <a href="https://www.americatv.com.pe/envivo" target="_blank"
+                                        class="btn btn-danger btn-sm">
+                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 col-sm-4 mb-4">
+                            <div class="card text-center card-border-green shadow-sm">
+                                <div class="card-body">
+                                    <img src="/img/channels/espn.png" alt="América TV Logo" class="mb-3"
+                                        style="width: 100px; height: auto;">
+                                    <br>
+                                    <a href="https://www.americatv.com.pe/envivo" target="_blank"
+                                        class="btn btn-danger btn-sm">
+                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 col-sm-4 mb-4">
+                            <div class="card text-center card-border-green shadow-sm">
+                                <div class="card-body">
+                                    <img src="/img/channels/espn.png" alt="América TV Logo" class="mb-3"
+                                        style="width: 100px; height: auto;">
+                                    <br>
+                                    <a href="https://www.americatv.com.pe/envivo" target="_blank"
+                                        class="btn btn-danger btn-sm">
+                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 col-sm-4 mb-4">
+                            <div class="card text-center card-border-green shadow-sm">
+                                <div class="card-body">
+                                    <img src="/img/channels/espn.png" alt="América TV Logo" class="mb-3"
+                                        style="width: 100px; height: auto;">
+                                    <br>
+                                    <a href="https://www.americatv.com.pe/envivo" target="_blank"
+                                        class="btn btn-danger btn-sm">
+                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 col-sm-4 mb-4">
+                            <div class="card text-center card-border-green shadow-sm">
+                                <div class="card-body">
+                                    <img src="/img/channels/espn.png" alt="América TV Logo" class="mb-3"
+                                        style="width: 100px; height: auto;">
+                                    <br>
+                                    <a href="https://www.americatv.com.pe/envivo" target="_blank"
+                                        class="btn btn-danger btn-sm">
+                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 col-sm-4 mb-4">
+                            <div class="card text-center card-border-green shadow-sm">
+                                <div class="card-body">
+                                    <img src="/img/channels/espn.png" alt="América TV Logo" class="mb-3"
+                                        style="width: 100px; height: auto;">
+                                    <br>
+                                    <a href="https://www.americatv.com.pe/envivo" target="_blank"
+                                        class="btn btn-danger btn-sm">
+                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 col-sm-4 mb-4">
+                            <div class="card text-center card-border-green shadow-sm">
+                                <div class="card-body">
+                                    <img src="/img/channels/espn.png" alt="América TV Logo" class="mb-3"
+                                        style="width: 100px; height: auto;">
+                                    <br>
+                                    <a href="https://www.americatv.com.pe/envivo" target="_blank"
+                                        class="btn btn-danger btn-sm">
+                                        <i class="bi bi-play-fill"></i> Ver canal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Espacio para banner largo en el lado derecho -->
+                <div class="col-md-3 d-none d-md-block">
+                    <!-- Banner derecho largo -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <script src="config.js?v=1.29"></script>
+    <script src="index.js?v=1.29"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        class="btn btn-primary position-fixed bottom-0 end-0 m-3 rounded-circle shadow" style="z-index: 999;">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+</body>
+
+</html>
