@@ -51,9 +51,9 @@ function searchMatch(channelId, linkId) {
     channel.links.forEach(link => {
         const isActive = link.id === linkId;
             containerBtns.innerHTML += `
-                <button class="btn btn-primary mt-3 ${isActive ? 'disabled' : 'btn-option'}"
-                    channelId="${channel.id}" linkId="${link.id}" isFormat='${link.isFormat}'>
-                    ${link.name}
+                <button class="btn btn-primary btn px-4 py-2 shadow-sm rounded-pill ${isActive ? 'disabled' : 'btn-option'}"
+                    channelId="${channel.id}" linkId="${link.id}" isFormat='${link.isFormat}' style="font-size: 0.8rem;">
+                    <i class="bi bi-play-fill me-1"></i>${link.name}
                 </button>
             `;
         
@@ -99,15 +99,6 @@ function loadStream(url, channel) {
         video.src = proxyUrl;
         video.play();
     }
-}
-
-function playVideo() {
-    const video = document.getElementById('videoPlayer');
-    video.play();
-}
-function pauseVideo() {
-    const video = document.getElementById('videoPlayer');
-    video.pause();
 }
 
 document.addEventListener("DOMContentLoaded", validateRequest);
