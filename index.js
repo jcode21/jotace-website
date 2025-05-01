@@ -18,8 +18,8 @@ async function fetchData() {
             eventsDataToday = eventsToday;
             eventsDataNext = eventsNext;
             channelsData = data.channels
-            //renderTable(eventsDataToday, 'tBodyToday');
-            //renderTable(eventsDataNext, 'tBodyNext', true);
+            renderCards(eventsDataToday, 'divRowsCurrentEvents');
+            renderCards(eventsDataNext, 'divRowsNextEvents', true);
             renderChannels(channelsData);
         }
 
@@ -49,68 +49,79 @@ function filterEventsDataFromAPI(data) {
     const nowTime = now.getTime();
     const xHoursAgoTime = nowTime - X_HOUR * 3600 * 1000;
 
+    const FIFTEEN_MIN_MS = 15 * 60 * 1000;
+    const X_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
+
     data.forEach(category => {
         if (!category.championShips) return;
 
         category.championShips.forEach(championship => {
 
-            championship.matchDays
-                .forEach(matchDay => {
-                    matchDay.matchs.forEach(match => {
+            championship.matchDays.forEach(matchDay => {
+                matchDay.matchs.forEach(match => {
+                    const matchDateTime = parseDateTimeObject(match.dateTime);
+                    if (!matchDateTime) return;
 
-                        const matchDateTime = parseDateTimeObject(match.dateTime);
-                        if (!matchDateTime) return;
+                    if(match.show == 'N') return;
 
-                        // Comparación para eventos de hoy
-                        const matchDateStr = matchDateTime.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" });
-                        if (matchDateStr !== todayStr) return;
+                    const matchDateStr = matchDateTime.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" });
+                    if (matchDateStr !== todayStr) return;
 
-                        if (matchDateTime.getTime() >= xHoursAgoTime) {
-                            eventsToday.push({ ...match, date: matchDateTime, championshipName: championship.name });
+                    const matchEndTime = matchDateTime.getTime() + match.eventDuration * 60 * 1000;
+                    if (matchEndTime >= xHoursAgoTime) {
+
+                        const timeUntilStart = matchDateTime.getTime() - nowTime;
+                        const timeSinceStart = nowTime - matchDateTime.getTime();
+
+                        let status = "PENDING";
+                        if (timeSinceStart >= 0 && nowTime <= matchEndTime) {
+                            status = "LIVE";
+                        } else if (timeUntilStart <= FIFTEEN_MIN_MS && timeUntilStart > 0) {
+                            status = "NEXT";
+                        } else if (nowTime > matchEndTime) {
+                            status = "FINALIZED";
                         }
 
-                    });
+                        eventsToday.push({
+                            ...match,
+                            date: matchDateTime,
+                            championshipName: championship.name,
+                            status
+                        });
+                    }
                 });
-
-            const nextDay = new Date(now);
-            nextDay.setDate(now.getDate() + 1);
-            const nextDayStr = nextDay.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" });
-
-            let foundMatches = false;
+            });
 
             championship.matchDays.forEach(matchDay => {
-                if (foundMatches) return;
-
                 const nextMatches = matchDay.matchs.filter(match => {
                     const matchDateTime = parseDateTimeObject(match.dateTime);
                     if (!matchDateTime) return false;
 
-                    const matchDateStr = matchDateTime.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" });
-                    return matchDateStr === nextDayStr;
+                    const matchTime = matchDateTime.getTime();
+                    const timeUntilMatch = matchTime - nowTime;
 
+                    return matchTime > nowTime && timeUntilMatch <= X_DAYS_MS;
                 });
 
                 if (nextMatches.length > 0) {
-                    eventsNext.push(...nextMatches.slice(0, X_RECORDS_ADDITIONAL).map(match => ({ ...match, championshipName: championship.name })));
-                    foundMatches = true;
+                    eventsNext.push(...nextMatches.slice(0, X_RECORDS_ADDITIONAL).map(match => ({
+                        ...match,
+                        championshipName: championship.name
+                    })));
                 }
             });
 
-            if (!foundMatches) {
-                const nextMatchDayNumber = Number(championship.currentMatchDay) + 1;
-
-                championship.matchDays
-                    .filter(matchDay => Number(matchDay.number) === nextMatchDayNumber)
-                    .forEach(matchDay => {
-                        const nextMatches = matchDay.matchs.filter(match => match.dateTime && match.dateTime.trim() !== "").slice(0, X_RECORDS_ADDITIONAL);
-
-                        eventsNext.push(...nextMatches.map(match => ({ ...match, championshipName: championship.name })));
-                    });
-            }
         });
     });
 
     eventsToday.sort((a, b) => a.date - b.date);
+
+    const finalizedEvents = eventsToday.filter(event => event.status === "FINALIZED");
+    const nonFinalizedEvents = eventsToday.filter(event => event.status !== "FINALIZED");
+
+    eventsToday.length = 0;
+    eventsToday.push(...nonFinalizedEvents, ...finalizedEvents);
+
     eventsNext.sort((a, b) => a.date - b.date);
 
     return { eventsToday, eventsNext };
@@ -121,58 +132,30 @@ function parseDateTimeObject(dateTimeObj) {
     return new Date(dateTimeObj.seconds * 1000);
 }
 
-function renderTable(data, tableId, showDate = false) {
-    const tableBody = document.getElementById(tableId);
-    tableBody.innerHTML = "";
+function renderCards(data, elementId, showDate = false) {
+
+    const div = document.getElementById(elementId);
+    div.innerHTML = '';
+
+    let rows = '';
+
+    console.log(data)
 
     if (!data.length) {
-        //tableBody.innerHTML = `<tr><td colspan="2" class="text-center">No hay eventos disponibles</td></tr>`;
         return;
     }
 
     data.forEach(match => {
         const matchDateTime = match.date || parseDateTimeObject(match.dateTime);
         if (!matchDateTime) return;
-        const matchDateStr = matchDateTime.toLocaleDateString("es-ES");
-        const matchTimeStr = matchDateTime.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
-
-        const matchDisplayTime = showDate ? `${matchDateStr} ${matchTimeStr}` : matchTimeStr;
-
-        const row = document.createElement("tr");
-        row.classList.add("cursor-pointer");
-        row.innerHTML = `
-            <td class='text-center'>${matchDisplayTime}</td>
-            <td><strong>${match.championshipName}</strong>: ${match.homeTeam} vs ${match.visitingTeam}</td>
-        `;
 
         const filteredLinks = match.links.filter(link => !link.url.includes(".m3u8"));
 
-        const detailRow = document.createElement("tr");
-        detailRow.classList.add("detail-row", "d-none");
-
-        if (filteredLinks.length > 0) {
-            detailRow.innerHTML = `
-                <td colspan="2" class="bg-light">
-                    ${filteredLinks.map(link => `
-                        <a class='text-decoration-none d-block py-2 border-bottom' 
-                        href="channel/channel.html?matchId=${match.id}&linkId=${link.id}" target="_blank">
-                            ${link.name}
-                        </a>`).join("")}
-                </td>
-            `;
-        } else {
-            detailRow.innerHTML = `
-                <td colspan="2" class="text-center text-muted bg-light">
-                    Links disponibles minutos antes del evento!
-                </td>
-            `;
-        }
-
-        tableBody.append(row, detailRow);
-
-        row.addEventListener("click", () => detailRow.classList.toggle("d-none"));
+        rows += getRow(match, matchDateTime, filteredLinks, showDate);
 
     });
+
+    div.innerHTML = rows;
 }
 
 function searchEvents() {
@@ -188,7 +171,7 @@ function searchEvents() {
         event.visitingTeam.toLowerCase().includes(searchInput)
     );
 
-    renderTable(filteredData, 'tBodyToday');
+    renderCards(filteredData, 'tBodyToday');
 }
 
 function renderChannels(data) {
@@ -265,6 +248,100 @@ function renderChannels(data) {
     });
 
     divRowsChannels.innerHTML = cards;
+}
+
+function getRow(match, matchDateTime, links, showDate) {
+
+    const matchDateStr = matchDateTime.toLocaleDateString("es-ES");
+    const matchTimeStr = matchDateTime.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+
+    const matchDisplayTime = showDate ? `🗓️ ${matchDateStr} ${matchTimeStr}` : `🕒 ${matchTimeStr}`;
+
+
+    let linksHTML = ``;
+    links.forEach(link => {
+        linksHTML +=
+            `
+        <a href="channel/channel.html?matchId=${match.id}&linkId=${link.id}" target="_blank"
+                                                class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill"
+                                                style="font-size: 0.75rem;">
+                                                <i class="bi bi-play-fill me-1"></i>${link.name}
+                                            </a>
+        `;
+    });
+
+    let cardBorderClass = '';
+    let circleVsClass = ''
+    let textChampionNameClass = '';
+
+    switch (match.status) {
+        case "LIVE":
+            cardBorderClass = 'card-border-green';
+            circleVsClass = 'vs-circle-green'
+            textChampionNameClass + 'text-green';
+            break;
+        case "NEXT":
+            cardBorderClass = 'card-border-orange';
+            circleVsClass = 'vs-circle-orange'
+            textChampionNameClass + 'text-orange';
+            break;
+        case "PENDING":
+            cardBorderClass = 'card-border-pending';
+            circleVsClass = 'vs-circle-pending'
+            textChampionNameClass + '';
+            break;
+        case "FINALIZED":
+            cardBorderClass = 'card-border-red';
+            circleVsClass = 'vs-circle-red'
+            textChampionNameClass + 'text-red';
+            break;
+        default:
+            cardBorderClass = 'card-border-pending';
+            circleVsClass = 'vs-circle-pending';
+            textChampionNameClass + '';
+            break;
+    }
+
+
+    let row = `
+    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="card shadow-sm border-start border-1 ${cardBorderClass}">
+                                <div class="card-body py-2 px-3 dark-mode rounded">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="small fw-bold text-uppercase ${textChampionNameClass}">
+                                            🏆 ${match.championshipName}
+                                        </div>
+                                        <div class="small fw-bold">
+                                           ${matchDisplayTime}
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="text-center small">
+                                            <strong>🏠 ${match.homeTeam}</strong>
+                                        </div>
+                                        <span class="vs-circle ${circleVsClass}">vs</span>
+                                        <div class="text-center small">
+                                            <strong>✈️ ${match.visitingTeam}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between small mb-2 px-1">
+                                        <div>👨‍🦰 ${match.referee}</div>
+                                        <div>🏟️ ${match.venue}</div>
+                                    </div>
+                                    <div class="text-center mb-1">
+                                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                                            ${linksHTML}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    `;
+
+
+    return row;
 }
 
 document.getElementById("searchEvent").addEventListener("input", searchEvents);
