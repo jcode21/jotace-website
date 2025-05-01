@@ -17,11 +17,20 @@ async function fetchData() {
             const { eventsToday, eventsNext } = filterEventsDataFromAPI(data.categories);
             eventsDataToday = eventsToday;
             eventsDataNext = eventsNext;
-            channelsData = data.channels
+            channelsData = data.channels;
+        
+            // Pintar log si hay más de 5 eventos próximos
+            if (eventsDataNext.length > 5) {
+                console.log("Hay más de 5 eventos próximos:", eventsDataNext.length);
+                document.getElementById("btnShowMoreNextEvents").style.display = "inline";
+                document.getElementById("btnShowMoreNextEvents").innerHTML = `<i class="bi bi-plus-square"></i> ${(eventsDataNext.length - 5)} eventos más`;
+            }
+        
             renderCards(eventsDataToday, 'divRowsCurrentEvents');
-            renderCards(eventsDataNext, 'divRowsNextEvents', true);
+            renderCards(eventsDataNext.slice(0, 5), 'divRowsNextEvents', true);
             renderChannels(channelsData);
         }
+        
 
         const date = new Date();
         const options = { day: '2-digit', month: 'long', year: 'numeric' };
@@ -33,6 +42,10 @@ async function fetchData() {
         loading.style.display = "none"; // Ocultar loading
     }
 }
+
+document.getElementById("btnShowMoreNextEvents").addEventListener("click", () => {
+    document.getElementById("btnShowMoreNextEvents").style.display = "none"; // Oculta el botón
+});
 
 
 function filterEventsDataFromAPI(data) {
@@ -50,7 +63,7 @@ function filterEventsDataFromAPI(data) {
     const xHoursAgoTime = nowTime - X_HOUR * 3600 * 1000;
 
     const FIFTEEN_MIN_MS = 15 * 60 * 1000;
-    const X_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
+    const X_DAYS_MS = 15 * 24 * 60 * 60 * 1000;
 
     data.forEach(category => {
         if (!category.championShips) return;
@@ -316,18 +329,20 @@ function getRow(match, matchDateTime, links, showDate) {
                                            ${matchDisplayTime}
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <div class="text-center small">
+                                    <div class="position-relative text-center mb-2">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="small text-start">
                                             <strong>🏠 ${match.homeTeam}</strong>
-                                        </div>
-                                        <span class="vs-circle ${circleVsClass}">vs</span>
-                                        <div class="text-center small">
+                                            </div>
+                                            <div class="small text-end">
                                             <strong>✈️ ${match.visitingTeam}</strong>
+                                            </div>
                                         </div>
+                                        <span class="vs-circle ${circleVsClass} position-absolute top-50 start-50 translate-middle">vs</span>
                                     </div>
-                                    <div class="d-flex justify-content-between small mb-2 px-1">
-                                        <div>👨‍🦰 ${match.referee}</div>
-                                        <div>🏟️ ${match.venue}</div>
+                                    <div class="d-flex justify-content-between small mb-2">
+                                        <div>${(match.referee == '' ? '' : '👨‍🦰 ' + match.referee)}</div>
+                                        <div>${(match.venue == '' ? '' : '🏟️ ' + match.venue)}</div>
                                     </div>
                                     <div class="text-center mb-1">
                                         <div class="d-flex flex-wrap justify-content-center gap-2">
