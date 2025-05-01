@@ -1,36 +1,29 @@
+import { fetchData } from '../js/api.js';
+
 let channelsData = [];
 
 async function validateRequest() {
-
     const params = new URLSearchParams(window.location.search);
     const channelId = params.get("channelId");
-
-    if (!channelId) {
-        console.warn("No se encontró el parámetro 'id' en la URL");
-        return;
-    }
-
     const linkId = params.get("linkId");
 
-    if (!linkId) {
-        console.warn("No se encontró el parámetro 'linkId' en la URL");
+    if (!channelId || !linkId) {
+        console.warn("Faltan parámetros en la URL");
         return;
     }
 
-    let API = `${HOSTS.API_DATA}/generic`
-    const response = await fetch(API);
-    if (!response.ok) throw new Error(`Error en la API: ${response.status}`);
-
-    const data = await response.json();
-
-    if (data && data.categories) {
-        channelsData = data.channels
-
-        searchMatch(channelId, linkId)
-
-    }
-
+    await fetchData(
+        HOSTS,
+        (eventsToday, eventsNext, channels) => {
+            channelsData = channels;
+            searchMatch(channelId, linkId);
+        },
+        (error) => {
+            console.error("Error al cargar los datos del canal:", error);
+        }
+    );
 }
+
 
 function searchMatch(channelId, linkId) {
     const channel = channelsData.find(item => item.id === channelId);
@@ -107,7 +100,6 @@ function loadStream(url, channel) {
         video.play();
     }
 }
-
 
 function playVideo() {
     const video = document.getElementById('videoPlayer');
