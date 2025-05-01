@@ -2,6 +2,7 @@ import { parseDateTimeObject } from './utils.js';
 
 export function renderCards(data, elementId, showDate = false) {
     const container = document.getElementById(elementId);
+    container.innerHTML = ''
     container.innerHTML = data.map(match => {
         const dt = match.date || parseDateTimeObject(match.dateTime);
         const links = match.links?.filter(l => !l.url.includes('.m3u8')) || [];

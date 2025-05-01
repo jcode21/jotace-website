@@ -13,9 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
             eventsDataNext = next;
             channelsData = channels;
 
-            console.log(eventsDataToday)
-            console.log(eventsDataNext)
-
             if (eventsDataNext.length > 5) {
                 const btn = document.getElementById("btnShowMoreNextEvents");
                 btn.style.display = "inline";
@@ -41,5 +38,5 @@ document.getElementById("searchEvent").addEventListener("input", () => {
         e.homeTeam.toLowerCase().includes(input) ||
         e.visitingTeam.toLowerCase().includes(input)
     );
-    renderCards(filtered, 'divRowsNextEvents');
+    renderCards(filtered, 'divRowsCurrentEvents');
 });
