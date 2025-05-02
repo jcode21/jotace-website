@@ -1,4 +1,5 @@
 import { fetchData } from '../js/api.js';
+import { renderCards, renderChannels } from '../js/render.js';
 
 let eventsDataToday = [];
 let eventsDataNext = [];
@@ -11,6 +12,7 @@ async function fetchAndLoadData() {
             eventsDataToday = eventsToday;
             eventsDataNext = eventsNext;
             channelsData = channels;
+            renderChannels(channelsData);
             loadDataFrame();
         },
         (error) => {

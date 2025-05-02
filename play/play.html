@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <title>Jotace Futbol TV - Player</title>
 
-    <meta name="description"
-        content="Ofrecemos canales gratuitos para ver partidos
+    <meta name="description" content="Ofrecemos canales gratuitos para ver partidos
         de fútbol de todas las ligas del mundo.">
     <meta name="keywords" content="futbol en vivo, la liga, Champions League, f1, NBA">
     <meta name="author" content="Jotace Futbol TV">
@@ -16,8 +15,7 @@
 
     <!-- Meta Open Graph para compartir en redes sociales -->
     <meta property="og:title" content="Jotace Futbol TV - Futbol en vivo gratis">
-    <meta property="og:description"
-        content="Ofrecemos canales gratuitos para ver partidos
+    <meta property="og:description" content="Ofrecemos canales gratuitos para ver partidos
         de fútbol de todas las ligas del mundo.">
     <meta property="og:image" content="https://jotacefutbol.com/img/icon.png">
     <meta property="og:url" content="https://jotacefutbol.com">
@@ -25,14 +23,16 @@
     <!-- Meta Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Jotace Futbol TV - Futbol en vivo gratis">
-    <meta name="twitter:description"
-        content="Ofrecemos canales gratuitos para ver partidos
+    <meta name="twitter:description" content="Ofrecemos canales gratuitos para ver partidos
         de fútbol de todas las ligas del mundo.">
     <meta name="twitter:image" content="https://jotacefutbol.com/img/icon.png">
-    
+
     <link rel="icon" type="image/png" href="https://jotacefutbol.com/img/icon.png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="/style.css?v=2.0">
 
     <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
 
@@ -51,7 +51,7 @@
             font-size: 1.5rem;
         ">
         <div>
-            <span>Cargando Eventos. . .</span>
+            <span>Cargando. . .</span>
             <div class="spinner-border text-primary ms-2" role="status" style="width: 3rem; height: 3rem;">
                 <span class="visually-hidden">Loading...</span>
             </div>
@@ -59,12 +59,49 @@
     </div>
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-3">
+        <nav class="navbar navbar-expand-lg navbar-dark p-3">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Jotace Futbol TV</a>
+                <a class="navbar-brand fw-bold" href="/">Jotace Futbol TV</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a href="/" class="nav-link">Eventos</a></li>
+                    <ul class="navbar-nav ms-auto" id="containerNavBarTmp">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page"
+                                href="/championship/championship.html?id=86c2ed1c">Champions League</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page"
+                                href="/championship/championship.html?id=81120c55">La
+                                Liga</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page"
+                                href="/championship/championship.html?id=634ae8fc">Premier League</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page"
+                                href="/championship/championship.html?id=279d09fb">Copa Libertadores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page"
+                                href="/championship/championship.html?id=6c8d4735">Copa Sudamericana</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkCanalesTV"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Canales de TV
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCanalesTV"
+                                id="containerNavBar">
+                                <!-- Aquí irían los elementos del menú desplegable -->
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -72,11 +109,11 @@
     </header>
 
     <main class="container mt-4">
-        
+
         <div class="row justify-content-center mb-2">
             <div class="col-md-2 text-center d-none d-md-block">
-                 <!--BANNER LATERAL IZQUIERDO-->
-                 <div>
+                <!--BANNER LATERAL IZQUIERDO-->
+                <div>
                     <script type="text/javascript">
                         aclib.runBanner({
                             zoneId: '9878642',
@@ -95,7 +132,7 @@
                     <div class="container text-center" id="container-btns-links">
                     </div>
                 </div>
-                
+
             </div>
             <div class="col-md-2 text-center d-none d-md-block">
                 <!--BANNER LATERAL DERECHO-->
@@ -108,6 +145,33 @@
                 </div>
             </div>
         </div>
+
+        <!--ROW CHANNELS-->
+        <div class="row mt-5 justify-content-center">
+            <div class="col-12 col-md-6">
+                <h4 class="text-center fw-bold" id="title-channels">Canales de TV</h4>
+            </div>
+        </div>
+        <!--ROW CONTENT CARD CHANNELS-->
+        <div class="row mt-2">
+            <!-- Espacio para banner largo en el lado izquierdo -->
+            <div class="col-md-1 d-none d-md-block">
+                <!-- Banner izquierdo largo -->
+            </div>
+
+            <!-- Espacio para las cards -->
+            <div class="col-md-10">
+                <div class="row justify-content-center" id="divRowsChannels">
+
+                </div>
+            </div>
+
+            <!-- Espacio para banner largo en el lado derecho -->
+            <div class="col-md-2 d-none d-md-block">
+                <!-- Banner derecho largo -->
+            </div>
+        </div>
+
         <div class="row mt-5 mb-3">
             <div class="col-12 col-md-3">
 
@@ -127,8 +191,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Cargar HLS.js -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script src="/config.js?v=1.29"></script>
-    <script type="module" src="play.js?v=1.29"></script>
+    <script src="/js/config.js?v=2.0"></script>
+    <script type="module" src="play.js?v=2.0"></script>
 
 </body>
 
