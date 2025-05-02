@@ -35,11 +35,11 @@ export function renderChannels(channels) {
             //image = '/img/channels/atvsur.png'
 
         div.innerHTML += `
-            <div class="col-12 col-md-3 col-sm-4 mb-4">
+            <div class="col-12 col-lg-2 col-md-3 col-sm-4 mb-4">
                 <div class="card text-center card-border-green shadow-sm">
-                    <div class="card-body">
-                        <img src="${image}" alt="${ch.name} Logo" class="mb-1" style="width: 90px;">
-                        <h6 class="card-title fw-bold">${ch.name}</h6>
+                    <div class="card-body p-2">
+                        <img src="${image}" alt="${ch.name} Logo" class="mb-1" style="width: 70px;">
+                        <h6 class="card-title fw-bold" style='font-size: 0.8rem'>${ch.name}</h6>
                         <a href="${href}" target="_blank" class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill" style="font-size: 0.75rem;">
                             <i class="bi bi-play-fill me-1"></i>Ver canal
                         </a>
