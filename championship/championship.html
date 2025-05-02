@@ -29,10 +29,9 @@
 
     <link rel="icon" type="image/png" href="https://jotacefutbol.com/img/icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=1.29">
     <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css?v=1.29">
+    <link rel="stylesheet" href="/style.css?v=1.29">
 
 </head>
 
@@ -68,22 +67,28 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto" id="containerNavBarTmp">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                            <a class="nav-link" aria-current="page" href="/">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="championship/championship.html?id=86c2ed1c">Champions League</a>
+                            <a class="nav-link" aria-current="page"
+                                href="/championship/championship.html?id=86c2ed1c">Champions League</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="championship/championship.html?id=81120c55">La Liga</a>
+                            <a class="nav-link" aria-current="page"
+                                href="/championship/championship.html?id=81120c55">La
+                                Liga</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="championship/championship.html?id=634ae8fc">Premier League</a>
+                            <a class="nav-link" aria-current="page"
+                                href="/championship/championship.html?id=634ae8fc">Premier League</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="championship/championship.html?id=279d09fb">Copa Libertadores</a>
+                            <a class="nav-link" aria-current="page"
+                                href="/championship/championship.html?id=279d09fb">Copa Libertadores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="championship/championship.html?id=6c8d4735">Copa Sudamericana</a>
+                            <a class="nav-link" aria-current="page"
+                                href="/championship/championship.html?id=6c8d4735">Copa Sudamericana</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkCanalesTV"
@@ -112,25 +117,25 @@
                     </p>
                 </div>
                 <div class="col-12 col-md-6">
-                    <h4 class="text-center fw-bold">Jotace Futbol TV</h3>
-                        <p class="description">
-                            <strong>Jotace Futbol TV</strong> ofrece canales gratuitos para ver partidos
-                            del fútbol de Perú, Argentina, Chile, Colombia, Uruguay, Ecuador, Copa Libertadores, Copa
-                            Sudamericana, Champions League, LaLiga Española, y muchos más. También puedes descargar
-                            nuestra
-                            app en el siguiente enlace:
-                        </p>
-                        <p class="text-center">
-                            <strong><a href="https://play.google.com/store/apps/details?id=com.jcc.gota"><img
-                                        src="/img/playstore.png" alt="Icono" style="width:24px; height:24px;"> Click
-                                    para
-                                    descargar la App desde
-                                    Play Store</a></strong>
-                        </p>
-                        <p class="text-center d-block d-sm-none">
-                            <a href="https://play.google.com/store/apps/details?id=com.jcc.gota"><img
-                                    src="/img/qr_blue_web.svg" alt="img-app" style="width: 120px; height: 120px;"></a>
-                        </p>
+                    <h4 class="text-center fw-bold" id="championShipName"></h4>
+                    <p class="description">
+                        <strong>Jotace Futbol TV</strong> ofrece canales gratuitos para ver partidos
+                        del fútbol de Perú, Argentina, Chile, Colombia, Uruguay, Ecuador, Copa Libertadores, Copa
+                        Sudamericana, Champions League, LaLiga Española, y muchos más. También puedes descargar
+                        nuestra
+                        app en el siguiente enlace:
+                    </p>
+                    <p class="text-center">
+                        <strong><a href="https://play.google.com/store/apps/details?id=com.jcc.gota"><img
+                                    src="/img/playstore.png" alt="Icono" style="width:24px; height:24px;"> Click
+                                para
+                                descargar la App desde
+                                Play Store</a></strong>
+                    </p>
+                    <p class="text-center d-block d-sm-none">
+                        <a href="https://play.google.com/store/apps/details?id=com.jcc.gota"><img
+                                src="/img/qr_blue_web.svg" alt="img-app" style="width: 120px; height: 120px;"></a>
+                    </p>
                 </div>
                 <div class="col-12 col-md-3 mt-4 d-none d-md-block">
                     <p class="text-center">
@@ -161,71 +166,12 @@
                 </div>
                 <!-- Espacio para las cards -->
                 <div class="col-md-6" id="divRowsCurrentEvents">
-                    <!--div class="row">
-                        <div class="col-12 mb-3">
-                            <div class="card shadow-sm border-start border-1 card-border-green">
-                                <div class="card-body py-2 px-3 dark-mode rounded">
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <div class="small fw-bold text-uppercase text-green">
-                                            🏆 Champions League
-                                        </div>
-                                        <div class="small fw-bold">
-                                            🕒 20:00
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <div class="text-center small">
-                                            <strong>🏠 Equipo Local</strong>
-                                        </div>
-                                        <span class="vs-circle vs-circle-green">vs</span>
-                                        <div class="text-center small">
-                                            <strong>✈️ Equipo Visitante</strong>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between small mb-2 px-1">
-                                        <div>👨‍🦰 Juan Pérez</div>
-                                        <div>🏟️ Monumental</div>
-                                    </div>
-                                    <div class="text-center mb-1">
-                                        <div class="d-flex flex-wrap justify-content-center gap-2">
-                                            <a href="https://enlace1.com" target="_blank"
-                                                class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill"
-                                                style="font-size: 0.75rem;">
-                                                <i class="bi bi-play-fill me-1"></i>PLAY 1
-                                            </a>
-                                            <a href="https://enlace2.com" target="_blank"
-                                                class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill"
-                                                style="font-size: 0.75rem;">
-                                                <i class="bi bi-play-fill me-1"></i>PLAY 2
-                                            </a>
-                                            <a href="https://enlace3.com" target="_blank"
-                                                class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill"
-                                                style="font-size: 0.75rem;">
-                                                <i class="bi bi-play-fill me-1"></i>PLAY 3
-                                            </a>
-                                            <a href="https://enlace4.com" target="_blank"
-                                                class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill"
-                                                style="font-size: 0.75rem;">
-                                                <i class="bi bi-play-fill me-1"></i>PLAY 4
-                                            </a>
-                                            <a href="https://enlace5.com" target="_blank"
-                                                class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill"
-                                                style="font-size: 0.75rem;">
-                                                <i class="bi bi-play-fill me-1"></i>PLAY 5
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div-->
                 </div>
                 <!-- Espacio para banner largo en el lado derecho -->
                 <div class="col-md-3 d-none d-md-block">
                     <!-- Banner derecho largo -->
                 </div>
             </div>
-
 
             <!--ROW PROXIMOS EVENTOS-->
             <div class="row justify-content-center">
@@ -242,52 +188,11 @@
 
                 <!-- Espacio para las cards -->
                 <div class="col-md-6" id="divRowsNextEvents">
-                    <!--div class="row">
-                        <div class="col-12 mb-3">
-                            <div class="card shadow-sm border-start border-1 card-border-pending">
-                                <div class="card-body py-2 px-3 dark-mode rounded">
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <div class="small fw-bold text-uppercase">
-                                            🏆 Champions League
-                                        </div>
-                                        <div class="small fw-bold">
-                                            🗓️ 02/05/2025 20:00
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <div class="text-center small">
-                                            <strong>🏠 Equipo Local</strong>
-                                        </div>
-                                        <span class="vs-circle vs-circle-pending">vs</span>
-                                        <div class="text-center small">
-                                            <strong>✈️ Equipo Visitante</strong>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between small mb-2 px-1">
-                                        <div>👨‍🦰 Juan Pérez</div>
-                                        <div>🏟️ Monumental</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div-->
-
                 </div>
 
                 <!-- Espacio para banner largo en el lado derecho -->
                 <div class="col-md-3 d-none d-md-block">
                     <!-- Banner derecho largo -->
-                </div>
-            </div>
-
-            <div class="row mt-2 justify-content-center">
-                <div class="col-md-3 d-none d-md-block">
-                </div>
-                <div class="col-md-6 text-center">
-                    <button id="btnShowMoreNextEvents" class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill"
-                        style="font-size: 0.75rem;" style="display:none; margin-top: 10px;">Ver más</button>
-                </div>
-                <div class="col-md-3 d-none d-md-block">
                 </div>
             </div>
 
@@ -307,19 +212,6 @@
                 <!-- Espacio para las cards -->
                 <div class="col-md-10">
                     <div class="row justify-content-center" id="divRowsChannels">
-                        <!--div class="col-12 col-md-3 col-sm-4 mb-4">
-                            <div class="card text-center card-border-green shadow-sm">
-                                <div class="card-body">
-                                    <img src="/img/channels/espn.png" alt="América TV Logo" class="mb-3"
-                                        style="width: 100px; height: auto;">
-                                    <br>
-                                    <a href="https://www.americatv.com.pe/envivo" target="_blank"
-                                        class="btn btn-danger btn-sm">
-                                        <i class="bi bi-play-fill"></i> Ver canal
-                                    </a>
-                                </div>
-                            </div>
-                        </div-->
                     </div>
                 </div>
 
@@ -332,8 +224,8 @@
         </div>
     </main>
     <script src="/js/config.js?v=1.29"></script>
-    <script type="module" src="index.js?v=1.29"></script>
-    
+    <script type="module" src="/championship/championship.js?v=1.29"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"

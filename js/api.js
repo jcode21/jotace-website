@@ -31,7 +31,7 @@ function filterEventsDataFromAPI(data) {
     const nowTime = now.getTime();
     const xHoursAgoTime = nowTime - X_HOUR * 3600 * 1000;
     const FIFTEEN_MIN_MS = 15 * 60 * 1000;
-    const X_DAYS_MS = 15 * 24 * 60 * 60 * 1000;
+    const X_DAYS_MS = 5 * 24 * 60 * 60 * 1000;
 
     data.forEach(category => {
         category.championShips?.forEach(championship => {
@@ -44,8 +44,8 @@ function filterEventsDataFromAPI(data) {
                     }
 
                     const isToday = dt.getDate() === now.getDate() &&
-                                    dt.getMonth() === now.getMonth() &&
-                                    dt.getFullYear() === now.getFullYear();
+                        dt.getMonth() === now.getMonth() &&
+                        dt.getFullYear() === now.getFullYear();
 
                     if (!isToday) return;
                     if (match.show === 'N') return;
@@ -76,11 +76,11 @@ function filterEventsDataFromAPI(data) {
                 const futureMatches = matchDay.matchs.filter(m => {
                     const dt = parseDateTimeObject(m.dateTime);
                     if (!dt) return false;
-                
+
                     const isToday = dt.getDate() === now.getDate() &&
-                                    dt.getMonth() === now.getMonth() &&
-                                    dt.getFullYear() === now.getFullYear();
-                
+                        dt.getMonth() === now.getMonth() &&
+                        dt.getFullYear() === now.getFullYear();
+
                     const timeUntil = dt.getTime() - nowTime;
                     return !isToday && dt.getTime() > nowTime && timeUntil <= X_DAYS_MS;
                 });
@@ -89,7 +89,9 @@ function filterEventsDataFromAPI(data) {
                     eventsNext.push(...futureMatches.slice(0, X_RECORDS_ADDITIONAL).map(m => ({
                         ...m,
                         date: parseDateTimeObject(m.dateTime),
-                        championshipName: championship.name
+                        championshipName: championship.name,
+                        championshipId: championship.id,
+                        categoryEmoji: category.emoji,
                     })));
                 }
             });
