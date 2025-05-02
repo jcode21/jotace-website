@@ -1,36 +1,29 @@
+import { fetchData } from '../js/api.js';
+
 let channelsData = [];
 
 async function validateRequest() {
-
     const params = new URLSearchParams(window.location.search);
     const channelId = params.get("channelId");
-
-    if (!channelId) {
-        console.warn("No se encontró el parámetro 'id' en la URL");
-        return;
-    }
-
     const linkId = params.get("linkId");
 
-    if (!linkId) {
-        console.warn("No se encontró el parámetro 'linkId' en la URL");
+    if (!channelId || !linkId) {
+        console.warn("Faltan parámetros en la URL");
         return;
     }
 
-    let API = `${HOSTS.API_DATA}/generic`
-    const response = await fetch(API);
-    if (!response.ok) throw new Error(`Error en la API: ${response.status}`);
-
-    const data = await response.json();
-
-    if (data && data.categories) {
-        channelsData = data.channels
-
-        searchMatch(channelId, linkId)
-
-    }
-
+    await fetchData(
+        HOSTS,
+        (eventsToday, eventsNext, channels) => {
+            channelsData = channels;
+            searchMatch(channelId, linkId);
+        },
+        (error) => {
+            console.error("Error al cargar los datos del canal:", error);
+        }
+    );
 }
+
 
 function searchMatch(channelId, linkId) {
     const channel = channelsData.find(item => item.id === channelId);
@@ -58,9 +51,9 @@ function searchMatch(channelId, linkId) {
     channel.links.forEach(link => {
         const isActive = link.id === linkId;
             containerBtns.innerHTML += `
-                <button class="btn btn-primary mt-3 ${isActive ? 'disabled' : 'btn-option'}"
-                    channelId="${channel.id}" linkId="${link.id}" isFormat='${link.isFormat}'>
-                    ${link.name}
+                <button class="btn btn-primary btn px-4 py-2 shadow-sm rounded-pill ${isActive ? 'disabled' : 'btn-option'}"
+                    channelId="${channel.id}" linkId="${link.id}" isFormat='${link.isFormat}' style="font-size: 0.8rem;">
+                    <i class="bi bi-play-fill me-1"></i>${link.name}
                 </button>
             `;
         
@@ -106,16 +99,6 @@ function loadStream(url, channel) {
         video.src = proxyUrl;
         video.play();
     }
-}
-
-
-function playVideo() {
-    const video = document.getElementById('videoPlayer');
-    video.play();
-}
-function pauseVideo() {
-    const video = document.getElementById('videoPlayer');
-    video.pause();
 }
 
 document.addEventListener("DOMContentLoaded", validateRequest);
