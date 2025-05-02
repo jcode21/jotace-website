@@ -53,13 +53,44 @@
         </div>
     </div>
 
-    <header class="pb-4">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary p-3 fixed-top">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark p-3">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Jotace Futbol TV</a>
+                <a class="navbar-brand fw-bold" href="/">Jotace Futbol TV</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a href="/" class="nav-link">Eventos</a></li>
+                    <ul class="navbar-nav ms-auto" id="containerNavBarTmp">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="championship/championship.html?id=86c2ed1c">Champions League</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="championship/championship.html?id=81120c55">La Liga</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="championship/championship.html?id=634ae8fc">Premier League</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="championship/championship.html?id=279d09fb">Copa Libertadores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="championship/championship.html?id=6c8d4735">Copa Sudamericana</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkCanalesTV"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Canales de TV
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCanalesTV"
+                                id="containerNavBar">
+                                <!-- Aquí irían los elementos del menú desplegable -->
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -99,6 +130,32 @@
             </div>
             <div class="col-12 col-md-4">
                 <button class="btn btn-primary btn px-4 py-2 shadow-sm rounded-pill w-100" id="btnFull">Pantalla Completa</button>
+            </div>
+        </div>
+
+        <!--ROW CHANNELS-->
+        <div class="row mt-5 justify-content-center">
+            <div class="col-12 col-md-6">
+                <h4 class="text-center fw-bold" id="title-channels">Canales de TV</h4>
+            </div>
+        </div>
+        <!--ROW CONTENT CARD CHANNELS-->
+        <div class="row mt-2">
+            <!-- Espacio para banner largo en el lado izquierdo -->
+            <div class="col-md-1 d-none d-md-block">
+                <!-- Banner izquierdo largo -->
+            </div>
+
+            <!-- Espacio para las cards -->
+            <div class="col-md-10">
+                <div class="row justify-content-center" id="divRowsChannels">
+                    
+                </div>
+            </div>
+
+            <!-- Espacio para banner largo en el lado derecho -->
+            <div class="col-md-3 d-none d-md-block">
+                <!-- Banner derecho largo -->
             </div>
         </div>
     </main>

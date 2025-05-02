@@ -1,4 +1,5 @@
 import { fetchData } from '../js/api.js';
+import { renderCards, renderChannels } from '../js/render.js';
 
 let channelsData = [];
 
@@ -15,8 +16,11 @@ async function validateRequest() {
     await fetchData(
         HOSTS,
         (eventsToday, eventsNext, channels) => {
+
             channelsData = channels;
+            renderChannels(channelsData);
             searchMatch(channelId, linkId);
+
         },
         (error) => {
             console.error("Error al cargar los datos del canal:", error);
