@@ -25,8 +25,8 @@ export function renderChannels(channels) {
         if (ch.show !== 'Y' || !ch.links.length) return;
         const url = ch.links[0].url;
         const href = url.includes('.m3u8')
-            ? `play/play.html?channelId=${ch.id}&linkId=${ch.links[0].id}`
-            : `channel/channel.html?channelId=${ch.id}&linkId=${ch.links[0].id}`;
+            ? `/play/play.html?channelId=${ch.id}&linkId=${ch.links[0].id}`
+            : `/channel/channel.html?channelId=${ch.id}&linkId=${ch.links[0].id}`;
 
             if(ch.imageName !== undefined && ch.imageName != ''){
                 image = '/img/channels/' + ch.imageName; 
