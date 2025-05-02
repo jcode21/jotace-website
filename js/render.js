@@ -1,6 +1,7 @@
 import { parseDateTimeObject } from './utils.js';
 
 export function renderCards(data, elementId, showDate = false) {
+    //console.log(data)
     const container = document.getElementById(elementId);
     container.innerHTML = ''
     container.innerHTML = data.map(match => {

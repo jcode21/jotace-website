@@ -64,6 +64,7 @@ function filterEventsDataFromAPI(data) {
                             ...match,
                             date: dt,
                             championshipName: championship.name,
+                            championshipId: championship.id,
                             categoryEmoji: category.emoji,
                             status
                         });
