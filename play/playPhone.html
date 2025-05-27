@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gota Player</title>
+</head>
+
+<body>
+
+    <main class="container mt-4">
+        <video id="videoPlayer" controls></video>
+    </main>
+    <!-- Cargar HLS.js -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        var url = "https://stream.ads.ottera.tv/playlist.m3u8?network_id=4827"
+
+        const video = document.getElementById('videoPlayer');
+
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                console.log("Video listo para reproducir");
+                video.play();
+            });
+
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = proxyUrl;
+            video.play();
+        }
+    </script>
+
+</body>
+
+</html>
