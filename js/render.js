@@ -40,7 +40,7 @@ export function renderChannels(channels) {
                     <div class="card-body p-2">
                         <img src="${image}" alt="${ch.name} Logo" class="mb-1" style="width: 70px;">
                         <h6 class="card-title fw-bold" style='font-size: 0.8rem'>${ch.name}</h6>
-                        <a href="${href}" target="_blank" class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill" style="font-size: 0.75rem;">
+                        <a href="${href}" class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill" style="font-size: 0.75rem;">
                             <i class="bi bi-play-fill me-1"></i>Ver canal
                         </a>
                     </div>
@@ -49,7 +49,7 @@ export function renderChannels(channels) {
 
         const li = document.createElement("li");
         li.className = "cursor-pointer";
-        li.innerHTML = `<a href="${href}" target="_blank" class="dropdown-item">${ch.name}</a>`;
+        li.innerHTML = `<a href="${href}" class="dropdown-item">${ch.name}</a>`;
         nav.appendChild(li);
     });
 }
@@ -60,7 +60,7 @@ function getRow(match, dt, links, showDate) {
     const displayTime = showDate ? `🗓️ ${dateStr} ${timeStr}` : `🕒 ${timeStr}`;
 
     const linkBtns = links.map(l => `
-        <a href="channel/channel.html?matchId=${match.id}&linkId=${l.id}" target="_blank"
+        <a href="channel/channel.html?matchId=${match.id}&linkId=${l.id}"
            class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill" style="font-size: 0.75rem;">
            <i class="bi bi-play-fill me-1"></i>${l.name}
         </a>`).join('');
