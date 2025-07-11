@@ -19,26 +19,29 @@ export function renderChannels(channels) {
 
     const sorted = [...channels].sort((a, b) => Number(a.order) - Number(b.order));
 
-    let image = '/img/tv.png';
-
     sorted.forEach(ch => {
         if (ch.show !== 'Y' || !ch.links.length) return;
+
+        var image = '/img/tv.png';
         const url = ch.links[0].url;
         const href = url.includes('.m3u8')
             ? `/play/play.html?channelId=${ch.id}&linkId=${ch.links[0].id}`
             : `/channel/channel.html?channelId=${ch.id}&linkId=${ch.links[0].id}`;
 
-            if(ch.imageName !== undefined && ch.imageName != ''){
-                image = '/img/channels/' + ch.imageName; 
-            }
+            if(ch.imageUrl !== undefined && ch.imageUrl != ''){
+                image = ch.imageUrl; 
+                console.log("URL ", image)
 
-            //image = '/img/channels/atvsur.png'
+            }
 
         div.innerHTML += `
             <div class="col-12 col-lg-2 col-md-3 col-sm-4 mb-4">
                 <div class="card text-center card-border-green shadow-sm">
                     <div class="card-body p-2">
-                        <img src="${image}" alt="${ch.name} Logo" class="mb-1" style="width: 70px;">
+                        <img src="${image}" alt="${ch.name} Logo"
+                            class="mb-1"
+                            style="width: 100px; height: 80px; object-fit: contain; background-color:rgb(0, 21, 28); border-radius: 4px;">
+
                         <h6 class="card-title fw-bold" style='font-size: 0.8rem'>${ch.name}</h6>
                         <a href="${href}" class="btn btn-primary btn-sm px-2 py-1 shadow-sm rounded-pill" style="font-size: 0.75rem;">
                             <i class="bi bi-play-fill me-1"></i>Ver canal
