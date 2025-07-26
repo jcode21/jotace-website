@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("searchEvent").addEventListener("input", () => {
     const input = document.getElementById("searchEvent").value.toLowerCase();
     const filtered = eventsDataToday.filter(e =>
-        e.championshipName.toLowerCase().includes(input) ||
+        e.championShipName.toLowerCase().includes(input) ||
         e.homeTeam.toLowerCase().includes(input) ||
         e.visitingTeam.toLowerCase().includes(input)
     );

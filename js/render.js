@@ -78,7 +78,7 @@ function getRow(match, dt, links, showDate) {
             <div class="card shadow-sm border-start border-1 card-border-${border}">
                 <div class="card-body py-2 px-3 dark-mode rounded">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <div class="small fw-bold text-uppercase">${match.categoryEmoji} ${match.championshipName}</div>
+                        <div class="small fw-bold text-uppercase">${match.categoryEmoji} ${match.championShipName}</div>
                         <div class="small fw-bold">${displayTime}</div>
                     </div>
                     <div class="position-relative text-center mb-2">
