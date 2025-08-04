@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Marcador de Fútbol Editable</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #0e0e0e;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      gap: 40px;
+    }
+
+    /* Scoreboard */
+    .container {
+      position: relative;
+      width: 600px;
+    }
+
+    .scoreboard {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 10px 20px;
+      border-radius: 12px;
+      width: 100%;
+      height: 100px;
+      box-shadow: 0 0 15px rgba(255, 153, 51, 0.5);
+    }
+
+    .team {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .team img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid white;
+      object-fit: cover;
+    }
+
+    .team-name {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .score {
+      font-size: 2.5em;
+      font-weight: bold;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .match-time {
+      position: absolute;
+      top: -30px;
+      right: 10px;
+      font-size: 1em;
+      background-color: rgba(255, 153, 51, 0.8);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    /* Control Panel */
+    .panel {
+      width: 300px;
+      background-color: #111;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #333;
+    }
+
+    .panel h2 {
+      margin-top: 0;
+      font-size: 1.2em;
+      color: #ff9933;
+    }
+
+    .panel label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .panel input[type="text"],
+    .panel input[type="number"] {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .panel input[type="file"] {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="scoreboard">
+      <div class="team">
+        <img id="logo1" src="" alt="Logo Local" />
+        <div class="team-name" id="team1-name">Local FC</div>
+      </div>
+      <div class="score" id="score">0 - 0</div>
+      <div class="team">
+        <img id="logo2" src="" alt="Logo Visitante" />
+        <div class="team-name" id="team2-name">Visitante FC</div>
+      </div>
+    </div>
+    <div class="match-time" id="match-time">00'</div>
+  </div>
+
+  <div class="panel">
+    <h2>Editar Marcador</h2>
+    <label>Equipo Local</label>
+    <input type="text" id="input-team1" placeholder="Nombre local" />
+
+    <label>Logo Local</label>
+    <input type="file" id="input-logo1" accept="image/*" />
+
+    <label>Equipo Visitante</label>
+    <input type="text" id="input-team2" placeholder="Nombre visitante" />
+
+    <label>Logo Visitante</label>
+    <input type="file" id="input-logo2" accept="image/*" />
+
+    <label>Goles Local</label>
+    <input type="number" id="input-score1" min="0" value="0" />
+
+    <label>Goles Visitante</label>
+    <input type="number" id="input-score2" min="0" value="0" />
+
+    <label>Minuto</label>
+    <input type="text" id="input-minute" placeholder="Ej. 72'" />
+  </div>
+
+  <script>
+    // Text fields
+    document.getElementById("input-team1").addEventListener("input", e => {
+      document.getElementById("team1-name").textContent = e.target.value || "Local FC";
+    });
+
+    document.getElementById("input-team2").addEventListener("input", e => {
+      document.getElementById("team2-name").textContent = e.target.value || "Visitante FC";
+    });
+
+    document.getElementById("input-score1").addEventListener("input", updateScore);
+    document.getElementById("input-score2").addEventListener("input", updateScore);
+
+    function updateScore() {
+      const s1 = document.getElementById("input-score1").value || 0;
+      const s2 = document.getElementById("input-score2").value || 0;
+      document.getElementById("score").textContent = `${s1} - ${s2}`;
+    }
+
+    document.getElementById("input-minute").addEventListener("input", e => {
+      document.getElementById("match-time").textContent = e.target.value || "00'";
+    });
+
+    // Image upload
+    document.getElementById("input-logo1").addEventListener("change", e => {
+      readImage(e.target.files[0], img => {
+        document.getElementById("logo1").src = img;
+      });
+    });
+
+    document.getElementById("input-logo2").addEventListener("change", e => {
+      readImage(e.target.files[0], img => {
+        document.getElementById("logo2").src = img;
+      });
+    });
+
+    function readImage(file, callback) {
+      const reader = new FileReader();
+      reader.onload = e => callback(e.target.result);
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
