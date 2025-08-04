@@ -34,21 +34,61 @@
 
     <link rel="stylesheet" href="/style.css?v=2.3">
     <link rel="stylesheet" href="api-football.css">
+
+    <style>
+        .led-scroll-container {
+            height: 38px;
+            /* Altura consistente para que no se corte */
+            line-height: 38px;
+            /* Alineación vertical del texto */
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            padding: 0 0;
+            color: rgb(255, 255, 255);
+            font-family: monospace;
+            font-size: 18px;
+            position: relative;
+            z-index: 10;
+        }
+
+
+        .led-scroll-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scrollLedText 20s linear infinite;
+        }
+
+        @keyframes scrollLedText {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark p-3">
-            <div class="container justify-content-center">
-                <img src="/img/jugador-de-futbol.png" style="width: 60px; height: 60px;">
-                <a class="navbar-brand fw-bold text-center" href="/" style="font-size: 1.8rem;">
-                    GOTA
-                </a>
+        <nav class="navbar navbar-expand-lg navbar-dark p-1 position-relative" style="background-color: #000;">
+            <div class="container d-flex align-items-center justify-content-center position-relative">
+                <!-- Texto tipo LED desplazándose -->
+                <div class="led-scroll-container">
+                    <div class="led-scroll-text">
+                        ⚽ ¡Bienvenidos a Gota! Todo en HD 🎥🔥 | Futbol, Tenis, F1
+                        y más | Buscalo en play store como "Gota" 🏆🏆🏆
+                    </div>
+                </div>
+
             </div>
         </nav>
+
     </header>
-    <main class="container mt-4">
+    <main class="container mt-2">
         <div class="row justify-content-center mb-2">
             <div class="col-md-7">
                 <div class="row">
@@ -56,13 +96,21 @@
                     </div>
                 </div>
                 <div class="row">
-                    
+                    <div class="col-12 text-center">
+                        <img src="/img/download.png" style="width: 380px; height: 220px;">
+                    </div>
+                    <div class="col-12 mt-3" style="min-height: 40px;">
+                        <div class="led-scroll-container">
+                            <div class="led-scroll-text">
+                                👉 Ingresa a Play Store, busca Gota
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-5">
-                <div id="wg-api-football-game" data-host="v3.football.api-sports.io"
-                    data-key="20c7a8982c488f406b87aedb9e7a0761" data-id="1402654" data-theme="grey" data-refresh="60"
-                    data-show-errors="false" data-show-logos="true">
+                <div id="wg-api-football-game" data-host="v3.football.api-sports.io" data-key="20c7a8982c488f406b87aedb9e7a0761" data-id="1402654"
+                    data-theme="grey" data-refresh="60" data-show-errors="false" data-show-logos="true">
                 </div>
             </div>
         </div>
