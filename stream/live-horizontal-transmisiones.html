@@ -72,19 +72,11 @@
         .overlay-top-right {
             position: absolute;
             top: 10px;
-            right: 80px;
+            right: 20px;
             width: 300px;
             height: auto;
             z-index: 5;
-            opacity: 1;
-        }
-
-        #rectangulo iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -96,12 +88,9 @@
             <div class="container d-flex align-items-center justify-content-center position-relative">
                 <!-- Texto tipo LED desplazándose -->
                 <div class="led-scroll-container">
-                    <!--div class="led-scroll-text">
+                    <div class="led-scroll-text">
                         ⚽ ¡Bienvenidos a Gota! Todo en HD 🎥🔥 | Futbol, Tenis, F1
                         y más | Buscalo en play store como "Gota" 🏆🏆🏆
-                    </div-->
-                    <div class="led-scroll-text">
-                        ⚽ ¡Bienvenidos a Alianza Universidad vs Univeritario! Tap tap, ayudame a llegar a 2k seguidores. Si estudias informatica, revisa mi perfil 😬
                     </div>
                 </div>
 
@@ -114,16 +103,21 @@
             <div class="col-md-12">
                 <div class="row">
                     <div id="rectangulo" class="position-relative border border-primary rounded mb-3"
-                        style="width: 100%; height: 660px; background-color: #000;">
-                        <img src="/img/Logo.png" class="overlay-top-right" style="width: 300px; height: 200px;" alt="Marca de agua">
-                        <iframe src="https://streamtpglobal.com/global2.php?stream=liga1max" frameborder="0"></iframe>
+                        style="width: 100%; height: 600px; background-color: #000;">
+                        <img src="/img/download.png" class="overlay-top-right" alt="Marca de agua">
                     </div>
                 </div>
+            </div>
+            <div class="col-12 text-center">
+                <button class="btn btn-warning" onclick="startCapture()">🎥 Iniciar Grabación</button>
+                <button class="btn btn-danger" onclick="stopRecording()" disabled id="stopBtn">⏹️ Detener y
+                    Descargar</button>
             </div>
             <div class="col-12 mt-1" style="min-height: 40px;">
                 <div class="led-scroll-container">
                     <div class="led-scroll-text">
-                        ⚽ ¡Bienvenidos a Alianza Universidad vs Univeritario! Tap tap, ayudame a llegar a 2k seguidores. Si estudias informatica, revisa mi perfil 😬
+                        ⚽ ¡Bienvenidos a Gota! Todo en HD 🎥🔥 | Futbol, Tenis, F1
+                        y más | Buscalo en play store como "Gota" 🏆🏆🏆
                     </div>
                 </div>
             </div>
@@ -135,6 +129,73 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script src="/js/config.js?v=2.3"></script>
     <script type="module" src="https://widgets.api-sports.io/2.0.3/widgets.js"></script>
+    <script>
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        async function startCapture() {
+            try {
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: { cursor: "always" },
+                    audio: false
+                });
+
+                const video = document.createElement("video");
+                video.srcObject = stream;
+                video.autoplay = true;
+                video.muted = true;
+                video.style.width = "100%";
+                video.style.height = "100%";
+                video.style.objectFit = "cover"; // mejora visual
+
+                const container = document.getElementById("rectangulo");
+
+                // Verifica si ya hay un video previo y elimínalo
+                const existingVideo = container.querySelector("video");
+                if (existingVideo) {
+                    existingVideo.remove();
+                }
+
+                // Agrega el video sin tocar la marca de agua
+                container.appendChild(video);
+
+                // Grabar
+                recordedChunks = [];
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = function (e) {
+                    if (e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+                };
+
+                mediaRecorder.onstop = function () {
+                    const blob = new Blob(recordedChunks, {
+                        type: "video/webm"
+                    });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "grabacion-jotace.webm";
+                    a.click();
+                    URL.revokeObjectURL(url);
+                };
+
+                mediaRecorder.start();
+                document.getElementById("stopBtn").disabled = false;
+            } catch (err) {
+                console.error("Error al capturar pantalla:", err);
+                alert("No se pudo iniciar la grabación.");
+            }
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== "inactive") {
+                mediaRecorder.stop();
+                document.getElementById("stopBtn").disabled = true;
+            }
+        }
+    </script>
 
 </body>
 
