@@ -7,7 +7,7 @@ export async function fetchData(HOSTS, onSuccess, onError, onFinally) {
     try {
         const API = `${HOSTS.API_DATA_MATCHS}`;
         const response = await fetch(API);
-        if (!response.ok) throw new Error(`Error en la API: ${response.status}`);
+        if (!response.ok) throw new Error(`Error en la API: ${response.statusColor}`);
         const data = await response.json();
         if (!data || !data.matchs) return;
 
@@ -15,7 +15,7 @@ export async function fetchData(HOSTS, onSuccess, onError, onFinally) {
 
         const APIChannels = `${HOSTS.API_DATA_CHANNELS}`;
         const responseChannels = await fetch(APIChannels);
-        if (!responseChannels.ok) throw new Error(`Error en la API: ${response.status}`);
+        if (!responseChannels.ok) throw new Error(`Error en la API: ${response.statusColor}`);
         const dataChannels = await responseChannels.json();
         if (!dataChannels || !dataChannels.channels) return;
         const channelsData = dataChannels.channels;
@@ -56,17 +56,18 @@ function filterEventsDataFromAPI(data) {
 
         const end = dt.getTime() + match.eventDuration * 60 * 1000;
         if (end >= xHoursAgoTime) {
-            let status = "PENDING";
+            let statusColor = "PENDING";
             const deltaStart = nowTime - dt.getTime();
             const deltaFuture = dt.getTime() - nowTime;
 
-            if (deltaStart >= 0 && nowTime <= end) status = "LIVE";
-            else if (deltaFuture <= FIFTEEN_MIN_MS && deltaFuture > 0) status = "NEXT";
-            else if (nowTime > end) status = "FINALIZED";
+            if (deltaStart >= 0 && nowTime <= end) statusColor = "LIVE";
+            else if (deltaFuture <= FIFTEEN_MIN_MS && deltaFuture > 0) statusColor = "NEXT";
+            else if (nowTime > end) statusColor = "FINALIZED";
 
             eventsToday.push({
                 ...match,
-                date: dt
+                date: dt,
+                statusColor: statusColor
             });
 
         }
@@ -94,8 +95,8 @@ function filterEventsDataFromAPI(data) {
 
     // Ordenar y separar por estado
     eventsToday.sort((a, b) => a.date - b.date);
-    const finalized = eventsToday.filter(e => e.status === "FINALIZED");
-    const active = eventsToday.filter(e => e.status !== "FINALIZED");
+    const finalized = eventsToday.filter(e => e.statusColor === "FINALIZED");
+    const active = eventsToday.filter(e => e.statusColor !== "FINALIZED");
 
     return {
         eventsToday: [...active, ...finalized],

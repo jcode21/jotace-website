@@ -70,7 +70,7 @@ function getRow(match, dt, links, showDate) {
 
     const border = {
         LIVE: 'green', NEXT: 'orange', PENDING: 'pending', FINALIZED: 'red'
-    }[match.status] || 'pending';
+    }[match.statusColor] || 'pending';
 
     return `
     <div class="row">
